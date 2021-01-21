@@ -20,7 +20,7 @@ webhook_links = []
 ```
 插入 Discord 的 webhook 連結，如下：
 ```py
-webhook_links = [ 'https://discordapp.com/api/webhooks/.../...']
+webhook_links = [ 'https://discordapp.com/api/webhooks/.../...' ]
 ```
 如果您有超過一個連結需要加入，請使用逗號分隔：
 ```py
