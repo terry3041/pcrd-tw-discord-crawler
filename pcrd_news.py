@@ -8,7 +8,7 @@ from discord_webhook import DiscordWebhook, DiscordEmbed
 base_Url = 'http://www.princessconnect.so-net.tw'
 current_title = None
 timer_interval = 600
-webhook_links = []
+webhook_links = ['']
 
 def remove_new_line_symbol(lines):
     removedLines = []
@@ -63,16 +63,15 @@ def get_pcrd_news():
                 content += e.get_text('\n', '<br/>')
             content = content.replace('【', '\n**【')
             content = content.replace('】', '】**')
-            content = (content[:1850] + ' ......') if len(content) > 1850 else content
+            content = (content[:1850] + ' ......\n[詳細內容](' + news_link + ')') if len(content) > 1850 else content
 
             news_link = urllib.parse.urljoin(base_Url, current_link)
 
             embed = DiscordEmbed()
-            embed.set_author(name='超異域公主連結☆Re：Dive', url='https://www.facebook.com/SonetPCR/',
-                            icon_url='http://www.princessconnect.so-net.tw/images/pc-icon.png')
-            embed.title = event_type + '：' + current_title
+            embed.set_author(name='超異域公主連結☆Re：Dive - ' + event_type, icon_url='http://www.princessconnect.so-net.tw/images/pc-icon.png')
+            embed.title = current_title
+            embed.url = news_link
             embed.description = content
-            embed.add_embed_field(name='官網連結', value=news_link)
             embed.color = tag_color
             
             for link in webhook_links:
