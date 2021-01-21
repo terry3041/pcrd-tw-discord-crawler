@@ -1,13 +1,13 @@
 # PCRD-TW-webhook-crawler
-> PCRD-TW-webhook-crawler 將從[超異域公主連結RE:DIVE 台灣官方網站](http://www.princessconnect.so-net.tw/news)進行爬蟲解析，抓取最新的公告並透過webhook發佈到Discord上
+> PCRD-TW-webhook-crawler 將從 [台版《超異域公主連結☆Re：Dive》官方網站](http://www.princessconnect.so-net.tw/news) 進行爬蟲解析，抓取最新的公告並透過 webhook 發佈到 Discord 上
 
 # 開始使用
 ## 環境需求
-- Python 3.8.0+ (https://www.python.org/)
-- 需要安裝在requirements.txt中額外的套件
+- [Python 3.8.0+](https://www.python.org/)
+- 需要安裝在 requirements.txt 中額外的套件
 
 ## 安裝方式
-若要執行PCRD-TW-webhook-crawler，需要安裝額外的套件，使用終端機至此專案的資料夾中下此指令：
+若要執行 PCRD-TW-webhook-crawler，需要安裝額外的套件，使用終端機至此專案的資料夾中下此指令：
 
 ```
 pip install -r requirements.txt
@@ -18,7 +18,7 @@ pip install -r requirements.txt
 ```py
 webhook_links = []
 ```
-插入Discord的webhook連結，如下：
+插入 Discord 的 webhook 連結，如下：
 ```py
 webhook_links = [ 'https://discordapp.com/api/webhooks/.../...']
 ```
