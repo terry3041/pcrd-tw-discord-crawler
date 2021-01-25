@@ -12,6 +12,10 @@ PCRD-TW-webhook-crawler 將從 台版《超異域公主連結☆Re：Dive》[官
 ```
 pip install -r requirements.txt
 ```
+或
+```
+pip3 install -r requirements.txt
+```
 
 ## 設定
 用任意的文字編輯器開啟 "pcrd_news.py"，在
