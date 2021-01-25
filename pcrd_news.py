@@ -2,19 +2,14 @@ import datetime
 import requests
 import threading
 import urllib.parse
+import re
 from bs4 import BeautifulSoup
 from discord_webhook import DiscordWebhook, DiscordEmbed
 
 base_Url = 'http://www.princessconnect.so-net.tw'
 current_title = None
 timer_interval = 600
-webhook_links = ['']
-
-def remove_new_line_symbol(lines):
-    removedLines = []
-    for line in lines:
-        removedLines.append(line.rstrip('\r\n'))
-    return removedLines
+webhook_links = []
 
 def get_pcrd_news():
     global current_title
@@ -57,15 +52,16 @@ def get_pcrd_news():
             r = requests.get(base_Url + current_link)
             soup = BeautifulSoup(r.text, 'html.parser')
 
+            news_link = urllib.parse.urljoin(base_Url, current_link)
+
             section = soup.select('body > main > article > article > section > p')
             content = ''
             for e in section:
-                content += e.get_text('\n', '<br/>')
-            content = content.replace('【', '\n**【')
-            content = content.replace('】', '】**')
+                b = re.sub("(<br *\/?>\s*)(<br *\/?>\s*)(<br *\/?>\s*)+", "<br/><br/>", str(e))
+                fb = b.replace("<br/>", "\n")
+                content += BeautifulSoup(fb, "html.parser").get_text()
+            content = content.replace('*', '×')
             content = (content[:1850] + ' ......\n[詳細內容](' + news_link + ')') if len(content) > 1850 else content
-
-            news_link = urllib.parse.urljoin(base_Url, current_link)
 
             embed = DiscordEmbed()
             embed.set_author(name='超異域公主連結☆Re：Dive - ' + event_type, icon_url='http://www.princessconnect.so-net.tw/images/pc-icon.png')
@@ -81,9 +77,6 @@ def get_pcrd_news():
                 if "外掛停權" in current_title:
                     break
                 webhook.execute()
-                #print("已發布：" + current_title)
-            # print(embed.title)
-            # print(embed.description)
             print("已更新：" + current_title)
             isUpdated = True
         else:
@@ -100,7 +93,6 @@ def get_pcrd_news():
         f.truncate(0)
         f.writelines(writeTitles)
     f.close()
-    # threading.Timer(timer_interval, get_pcrd_news).start()
 
 
 if __name__ == '__main__':
