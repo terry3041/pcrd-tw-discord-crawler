@@ -1,6 +1,9 @@
 # PCRD-TW-webhook-crawler
 PCRD-TW-webhook-crawler 將從 台版《超異域公主連結☆Re：Dive》[官方網站](http://www.princessconnect.so-net.tw/news) 進行爬蟲解析，抓取最新的公告並透過 webhook 發佈到 Discord 上。
 
+## 例子
+![載入中...](https://i.imgur.com/OTCITow.png)
+
 # 開始使用
 ## 環境需求
 - [Python 3.8.0+](https://www.python.org/)
