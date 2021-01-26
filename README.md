@@ -7,7 +7,6 @@
 # 開始使用
 ## 環境需求
 - [Python 3.8.0+](https://www.python.org/)
-- 需要安裝在 requirements.txt 中額外的套件
 
 ## 安裝方式
 若要執行 PCRD-TW-webhook-crawler，需要安裝額外的套件，使用終端機至此專案的資料夾中下此指令：
