@@ -9,7 +9,7 @@
 - [Python 3.8.0+](https://www.python.org/)
 
 ## 安裝方式
-若要執行 PCRD-TW-webhook-crawler，需要安裝額外的套件，使用終端機至此專案的資料夾中下此指令：
+若要執行 PCRD-TW-webhook-crawler，需要安裝額外的套件，使用終端機至此專案的資料夾中執行此指令：
 
 ```
 pip install -r requirements.txt
@@ -20,7 +20,7 @@ pip3 install -r requirements.txt
 ```
 
 ## 設定
-用任意的文字編輯器開啟 "pcrd_news.py"，在
+用任意的文字編輯器開啟 `pcrd_news.py`，在
 ```py
 webhook_links = []
 ```
