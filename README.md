@@ -2,7 +2,7 @@
 從 台版《超異域公主連結☆Re：Dive》[官方網站](http://www.princessconnect.so-net.tw/news) 進行爬蟲解析，抓取最新的公告並透過 webhook 發佈到 Discord 上。
 
 ## 例子
-<img src="https://i.imgur.com/OTCITow.png" width="250">
+<img src="https://i.imgur.com/Yvwwpz2.png" width="250">
 
 # 開始使用
 ## 環境需求
