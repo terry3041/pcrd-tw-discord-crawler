@@ -34,6 +34,7 @@ webhook_links = [ 'https://discordapp.com/api/webhooks/.../...',
                   'https://discordapp.com/api/webhooks/.../...'
                 ]
 ```
+
 ## 使用方式
 使用終端機至專案資料夾執行此指令：
 ```
@@ -43,3 +44,7 @@ python pcrd_news.py
 ```
 python3 pcrd_news.py
 ```
+
+## 作者
+- 原作者 [@jinan-tw](https://github.com/jinan-tw)
+- 優化 [@terry3041](https://github.com/terry3041)
