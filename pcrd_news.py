@@ -26,8 +26,13 @@ def get_pcrd_news():
     divObjects = soup.find_all("dd")
     dtObjects = soup.find_all("dt")
 
+    r = requests.get("http://www.princessconnect.so-net.tw/news?page=2") # Page 2
+    soup = BeautifulSoup(r.text, 'html.parser')
+    divObjects += soup.find_all("dd")
+    dtObjects += soup.find_all("dt")
+
     isUpdated = False
-    count = 9
+    count = 19
     for div in reversed(divObjects):
         title = div.findAll("a", recursive=False)[0]
         event_type = dtObjects[count].findAll("span", recursive=False)[0].get_text()
@@ -83,8 +88,8 @@ def get_pcrd_news():
             print("未更新：" + current_title)
         
         count -= 1
-    
-    while len(writeTitles) > 20:
+
+    while len(writeTitles) > 30:
         writeTitles.pop()
 
     if isUpdated:
