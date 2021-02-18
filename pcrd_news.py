@@ -89,7 +89,7 @@ def get_pcrd_news():
         
         count -= 1
 
-    while len(writeTitles) > 30:
+    while len(writeTitles) > 20:
         writeTitles.pop()
 
     if isUpdated:
