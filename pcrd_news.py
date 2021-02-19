@@ -73,7 +73,7 @@ def get_pcrd_news():
             content = (content[:1000] + ' ......\n[詳細內容](' + news_link + ')') if len(content) > 1000 else content
 
             embed = DiscordEmbed()
-            embed.set_author(name='超異域公主連結☆Re：Dive - ' + event_type, icon_url='http://www.princessconnect.so-net.tw/images/pc-icon.png')
+            embed.set_author(name='超異域公主連結☆Re：Dive', icon_url='http://www.princessconnect.so-net.tw/images/pc-icon.png')
             embed.title = current_title
             embed.url = news_link
             embed.description = content
