@@ -32,10 +32,9 @@ def get_pcrd_news():
     dtObjects += soup.find_all("dt")
 
     isUpdated = False
-    count = 19
-    for div in reversed(divObjects):
-        title = div.findAll("a", recursive=False)[0]
-        event_type = dtObjects[count].findAll("span", recursive=False)[0].get_text()
+    for i in range(len(divObjects)):
+        title = list(reversed(divObjects))[i].findAll("a", recursive=False)[0]
+        event_type = dtObjects[i].findAll("span", recursive=False)[0].get_text()
 
         # tag color
         tag_color = 16077457
@@ -51,7 +50,7 @@ def get_pcrd_news():
                 find_news = True
                 break
 
-        if find_news == False:
+        if find_news == False and "外掛停權" not in current_title:
             writeTitles.insert(0, current_title + '\n')
             current_link = title['href']
             r = requests.get(base_Url + current_link)
@@ -79,15 +78,11 @@ def get_pcrd_news():
                 new_embed = embed
                 webhook = DiscordWebhook(url=link)
                 webhook.add_embed(new_embed)
-                if "外掛停權" in current_title:
-                    break
                 webhook.execute()
             print("已更新：" + current_title)
             isUpdated = True
         else:
             print("未更新：" + current_title)
-        
-        count -= 1
 
     while len(writeTitles) > 20:
         writeTitles.pop()
