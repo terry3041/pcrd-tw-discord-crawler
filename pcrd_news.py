@@ -66,9 +66,9 @@ def get_pcrd_news():
                         x.extract()
                 for div in e.find_all('div'):
                     div.unwrap()
-                b = re.sub("([ \t]*\n){3,}", "\n\n", str(e))
-                fb = b.replace("<br/>", "\n")
-                content += BeautifulSoup(fb, "html.parser").get_text()
+                brtag = str(e).replace("<br/>", "\n")
+                multiblank = re.sub("([ \t]*\n){3,}", "\n\n", brtag)
+                content += BeautifulSoup(multiblank, "html.parser").get_text()
             content = content.replace('*', '×')
             content = (content[:1000] + ' ......\n[詳細內容](' + news_link + ')') if len(content) > 1000 else content
 
