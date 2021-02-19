@@ -59,9 +59,14 @@ def get_pcrd_news():
             news_link = urllib.parse.urljoin(base_Url, current_link)
 
             section = soup.select('body > main > article > article > section > p')
-            content = ''
+            content = ""
             for e in section:
-                b = re.sub("(<br *\/?>\s*)(<br *\/?>\s*)(<br *\/?>\s*)+", "<br/><br/>", str(e))
+                for x in e.find_all():
+                    if len(x.get_text(strip=True)) == 0 and x.name != 'br':
+                        x.extract()
+                for div in e.find_all('div'):
+                    div.unwrap()
+                b = re.sub("([ \t]*\n){3,}", "\n\n", str(e))
                 fb = b.replace("<br/>", "\n")
                 content += BeautifulSoup(fb, "html.parser").get_text()
             content = content.replace('*', '×')
