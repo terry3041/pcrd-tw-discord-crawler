@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 import requests
 import threading
 import urllib.parse
@@ -15,6 +15,9 @@ def get_pcrd_news():
     global current_title
     global timer_interval
     
+    now = datetime.now()
+    time = now.strftime("%Y/%m/%d %H:%M:%S")
+
     # File Input
     f = open('pcrd_titles.txt','r+', encoding="utf-8")
     readTitles = f.readlines()
@@ -34,14 +37,15 @@ def get_pcrd_news():
     isUpdated = False
     for i in range(len(divObjects)):
         title = list(reversed(divObjects))[i].findAll("a", recursive=False)[0]
-        event_type = dtObjects[i].findAll("span", recursive=False)[0].get_text()
+        event_type = list(reversed(divObjects))[i].findAll("span", recursive=False)[0].get_text()
 
         # tag color
-        tag_color = 16077457
-        if event_type == '活動':
-            tag_color = 3775462
+        if event_type == '更新':
+            tag_color = 16077457
         elif event_type == '系統':
             tag_color = 10512325
+        else:
+            tag_color = 3775462
 
         current_title = title['title']
         find_news = False
@@ -70,7 +74,7 @@ def get_pcrd_news():
                 multiblank = re.sub("([ \t]*\n){3,}", "\n\n", brtag)
                 content += BeautifulSoup(multiblank, "html.parser").get_text()
             content = content.replace('*', '×')
-            content = (content[:1000] + ' ......\n[詳細內容](' + news_link + ')') if len(content) > 1000 else content
+            content = (content[:500] + ' ......\n[詳細內容](' + news_link + ')') if len(content) > 500 else content
 
             embed = DiscordEmbed()
             embed.set_author(name='超異域公主連結☆Re：Dive', icon_url='http://www.princessconnect.so-net.tw/images/pc-icon.png')
@@ -84,16 +88,16 @@ def get_pcrd_news():
                 webhook = DiscordWebhook(url=link)
                 webhook.add_embed(new_embed)
                 webhook.execute()
-            print("已更新：" + current_title)
+            print(f'[{time}] - 已更新：{current_title}')
             isUpdated = True
         else:
-            print("未更新：" + current_title)
+            print(f'[{time}] - 未更新：{current_title}')
 
     while len(writeTitles) > 20:
         writeTitles.pop()
 
     if isUpdated:
-        print("已儲存檔案")
+        print(f'[{time}] - 已儲存檔案')
         f.seek(0)
         f.truncate(0)
         f.writelines(writeTitles)
