@@ -37,7 +37,7 @@ def get_pcrd_news():
     isUpdated = False
     for i in range(len(divObjects)):
         title = list(reversed(divObjects))[i].findAll("a", recursive=False)[0]
-        event_type = list(reversed(divObjects))[i].findAll("span", recursive=False)[0].get_text()
+        event_type = list(reversed(dtObjects))[i].findAll("span", recursive=False)[0].get_text()
 
         # tag color
         if event_type == '更新':
